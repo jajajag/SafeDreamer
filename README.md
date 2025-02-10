@@ -32,7 +32,7 @@ Here is some subjections for install jax, the new manipulation should be found i
 
 ### Automatic Installation
 ```sh
-conda create -n example python=3.8
+conda create -n example python=3.10
 conda activate example
 pip install --upgrade pip
 
