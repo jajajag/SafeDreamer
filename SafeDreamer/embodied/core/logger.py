@@ -49,8 +49,8 @@ class Logger:
         self.scalar('fps', value)
     if not self._metrics:
       return
-    #for output in self.outputs:
-    #  output(tuple(self._metrics))
+    for output in self.outputs:
+      output(tuple(self._metrics))
     self._metrics.clear()
 
   def _compute_fps(self):
