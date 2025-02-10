@@ -59,19 +59,22 @@ class FromGym(embodied.Env):
     else:
       action = action[self._act_key]
     obs, reward, self._done, self._info = self._env.step(action)
+    cost = self._info['violation']
     return self._obs(
-        obs, reward,
+        obs, reward, cost
         is_last=bool(self._done),
         is_terminal=bool(self._info.get('is_terminal', self._done)))
 
   def _obs(
-      self, obs, reward, is_first=False, is_last=False, is_terminal=False):
+      self, obs, reward, cost, 
+      is_first=False, is_last=False, is_terminal=False):
     if not self._obs_dict:
       obs = {self._obs_key: obs}
     obs = self._flatten(obs)
     obs = {k: np.asarray(v) for k, v in obs.items()}
     obs.update(
         reward=np.float32(reward),
+        cost=cost,
         is_first=is_first,
         is_last=is_last,
         is_terminal=is_terminal)
