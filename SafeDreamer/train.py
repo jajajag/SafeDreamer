@@ -161,36 +161,34 @@ def make_envs(config, **overrides):
   return embodied.BatchEnv(envs, parallel=(config.envs.parallel != 'none'))
 
 
-"""
-def make_env(config, **overrides):
-  # You can add custom environments by creating and returning the environment
-  # instance here. Environments with different interfaces can be converted
-  # using `embodied.envs.from_gym.FromGym` and `embodied.envs.from_dm.FromDM`.
-  suite, task = config.task.split('_', 1)
-  ctor = {
-      'dummy': 'embodied.envs.dummy:Dummy',
-      'gym': 'embodied.envs.from_gym:FromGym',
-      'safetygym': 'embodied.envs.safetygym:SafetyGym',
-      'safetygymcoor': 'embodied.envs.safetygymcoor:SafetyGymCoor',
-      'safetygymmujoco': 'embodied.envs.safetygym_mujoco:SafetyGymMujoco',
-      'dm': 'embodied.envs.from_dmenv:FromDM',
-      'crafter': 'embodied.envs.crafter:Crafter',
-      'dmc': 'embodied.envs.dmc:DMC',
-      'atari': 'embodied.envs.atari:Atari',
-      'dmlab': 'embodied.envs.dmlab:DMLab',
-      'minecraft': 'embodied.envs.minecraft:Minecraft',
-      'loconav': 'embodied.envs.loconav:LocoNav',
-      'pinpad': 'embodied.envs.pinpad:PinPad',
-  }[suite]
-  if isinstance(ctor, str):
-    module, cls = ctor.split(':')
-    module = importlib.import_module(module)
-    ctor = getattr(module, cls)
-  kwargs = config.env.get(suite, {})
-  kwargs.update(overrides)
-  env = ctor(task, **kwargs)
-  return wrap_env(env, config)
-"""
+#def make_env(config, **overrides):
+#  # You can add custom environments by creating and returning the environment
+#  # instance here. Environments with different interfaces can be converted
+#  # using `embodied.envs.from_gym.FromGym` and `embodied.envs.from_dm.FromDM`.
+#  suite, task = config.task.split('_', 1)
+#  ctor = {
+#      'dummy': 'embodied.envs.dummy:Dummy',
+#      'gym': 'embodied.envs.from_gym:FromGym',
+#      'safetygym': 'embodied.envs.safetygym:SafetyGym',
+#      'safetygymcoor': 'embodied.envs.safetygymcoor:SafetyGymCoor',
+#      'safetygymmujoco': 'embodied.envs.safetygym_mujoco:SafetyGymMujoco',
+#      'dm': 'embodied.envs.from_dmenv:FromDM',
+#      'crafter': 'embodied.envs.crafter:Crafter',
+#      'dmc': 'embodied.envs.dmc:DMC',
+#      'atari': 'embodied.envs.atari:Atari',
+#      'dmlab': 'embodied.envs.dmlab:DMLab',
+#      'minecraft': 'embodied.envs.minecraft:Minecraft',
+#      'loconav': 'embodied.envs.loconav:LocoNav',
+#      'pinpad': 'embodied.envs.pinpad:PinPad',
+#  }[suite]
+#  if isinstance(ctor, str):
+#    module, cls = ctor.split(':')
+#    module = importlib.import_module(module)
+#    ctor = getattr(module, cls)
+#  kwargs = config.env.get(suite, {})
+#  kwargs.update(overrides)
+#  env = ctor(task, **kwargs)
+#  return wrap_env(env, config)
 
 
 def make_env(config, **overrides):
@@ -198,7 +196,7 @@ def make_env(config, **overrides):
   # instance here. Environments with different interfaces can be converted
   # using `embodied.envs.from_gym.FromGym` and `embodied.envs.from_dm.FromDM`.
   task = config.task
-  from .env.torch_wrapper import TorchWrapper
+  #from .env.torch_wrapper import TorchWrapper
   from .env.hopper_no_bonus import HopperNoBonusEnv
   from .env.cheetah_no_flip import CheetahNoFlipEnv
   from .env.ant_no_bonus import AntNoBonusEnv
