@@ -112,7 +112,7 @@ def train_eval(
       logger.add(train_replay.stats, prefix='replay')
       logger.add(eval_replay.stats, prefix='eval_replay')
       logger.add(timer.stats(), prefix='timer')
-      logger.write(fps=True)
+      #logger.write(fps=True)
   driver_train.on_step(train_step)
 
   checkpoint = embodied.Checkpoint(logdir / 'checkpoint.ckpt')
