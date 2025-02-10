@@ -16,3 +16,4 @@ checkpoint/
 *.ckpt
 safetygymnasium/
 ;
+*.swp

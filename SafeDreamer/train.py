@@ -4,6 +4,7 @@ import pathlib
 import sys
 import warnings
 from functools import partial as bind
+from gym.wrappers import RescaleAction
 
 warnings.filterwarnings('ignore', '.*box bound precision lowered.*')
 warnings.filterwarnings('ignore', '.*using stateful random seeds*')
@@ -186,6 +187,27 @@ def make_env(config, **overrides):
   kwargs = config.env.get(suite, {})
   kwargs.update(overrides)
   env = ctor(task, **kwargs)
+  return wrap_env(env, config)
+
+
+def make_env(config, **overrides):
+  # You can add custom environments by creating and returning the environment
+  # instance here. Environments with different interfaces can be converted
+  # using `embodied.envs.from_gym.FromGym` and `embodied.envs.from_dm.FromDM`.
+  task = config.task
+  from .env.torch_wrapper import TorchWrapper
+  from .env.hopper_no_bonus import HopperNoBonusEnv
+  from .env.cheetah_no_flip import CheetahNoFlipEnv
+  from .env.ant_no_bonus import AntNoBonusEnv
+  from .env.humanoid_no_bonus import HumanoidNoBonusEnv
+  envs = {
+    'hopper': HopperNoBonusEnv,
+    'cheetah-no-flip': CheetahNoFlipEnv,
+    'ant': AntNoBonusEnv,
+    'humanoid': HumanoidNoBonusEnv
+  }
+  env = envs[task]()
+  env = embodied.envs.from_gym.FromGym(env)
   return wrap_env(env, config)
 
 
