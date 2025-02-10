@@ -201,6 +201,7 @@ def make_env(config, **overrides):
   from .env.cheetah_no_flip import CheetahNoFlipEnv
   from .env.ant_no_bonus import AntNoBonusEnv
   from .env.humanoid_no_bonus import HumanoidNoBonusEnv
+  from embodied.envs import from_gym
   envs = {
     'hopper': HopperNoBonusEnv,
     'cheetah-no-flip': CheetahNoFlipEnv,
@@ -208,7 +209,8 @@ def make_env(config, **overrides):
     'humanoid': HumanoidNoBonusEnv
   }
   env = envs[task]()
-  env = embodied.envs.from_gym.FromGym(env)
+  #env = embodied.envs.from_gym.FromGym(env)
+  env = from_gym.FromGym(env)
   return wrap_env(env, config)
 
 
