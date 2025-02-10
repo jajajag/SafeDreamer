@@ -61,7 +61,7 @@ class FromGym(embodied.Env):
     obs, reward, self._done, self._info = self._env.step(action)
     cost = self._info['violation']
     return self._obs(
-        obs, reward, cost
+        obs, reward, cost,
         is_last=bool(self._done),
         is_terminal=bool(self._info.get('is_terminal', self._done)))
 
