@@ -72,6 +72,7 @@ class FromGym(embodied.Env):
       obs = {self._obs_key: obs}
     obs = self._flatten(obs)
     obs = {k: np.asarray(v) for k, v in obs.items()}
+    obs['cost'] = cost
     obs.update(
         reward=np.float32(reward),
         cost=cost,
