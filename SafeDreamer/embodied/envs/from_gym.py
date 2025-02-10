@@ -33,6 +33,7 @@ class FromGym(embodied.Env):
     spaces = {k: self._convert(v) for k, v in spaces.items()}
     return {
         **spaces,
+        'cost': embodied.Space(np.float32),
         'reward': embodied.Space(np.float32),
         'is_first': embodied.Space(bool),
         'is_last': embodied.Space(bool),
@@ -66,16 +67,15 @@ class FromGym(embodied.Env):
         is_terminal=bool(self._info.get('is_terminal', self._done)))
 
   def _obs(
-      self, obs, reward, cost, 
+      self, obs, reward, cost,
       is_first=False, is_last=False, is_terminal=False):
     if not self._obs_dict:
       obs = {self._obs_key: obs}
     obs = self._flatten(obs)
     obs = {k: np.asarray(v) for k, v in obs.items()}
-    obs['cost'] = cost
     obs.update(
+        cost=np.float32(cost),
         reward=np.float32(reward),
-        cost=cost,
         is_first=is_first,
         is_last=is_last,
         is_terminal=is_terminal)
