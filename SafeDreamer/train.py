@@ -147,7 +147,8 @@ def make_replay(
 
 
 def make_envs(config, **overrides):
-  suite, task = config.task.split('_', 1)
+  #suite, task = config.task.split('_', 1)
+  task = config.task
   ctors = []
   for index in range(config.envs.amount):
     ctor = lambda: make_env(config, **overrides)
