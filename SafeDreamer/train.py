@@ -160,6 +160,7 @@ def make_envs(config, **overrides):
   return embodied.BatchEnv(envs, parallel=(config.envs.parallel != 'none'))
 
 
+'''
 def make_env(config, **overrides):
   # You can add custom environments by creating and returning the environment
   # instance here. Environments with different interfaces can be converted
@@ -188,6 +189,7 @@ def make_env(config, **overrides):
   kwargs.update(overrides)
   env = ctor(task, **kwargs)
   return wrap_env(env, config)
+'''
 
 
 def make_env(config, **overrides):
